@@ -1,0 +1,16 @@
+"""Prints the actual numbers to copy onto the submission sheets (reads outputs/*.json + data)."""
+import json, pandas as pd
+c = json.load(open("outputs/cleaning_log.json")); m = json.load(open("outputs/model_results.json"))
+df = pd.read_csv("data/churn_featured_data.csv"); ov = df.churn_flag.mean()
+rate = lambda col: (df.groupby(col).churn_flag.mean() * 100).round(1)
+print("=== SHEET 1 ==="); print(f"Final dataset: {c['final_rows']} customers x {c['final_cols']} attributes (target: churn)")
+print(f"Duplicates removed: {c['duplicate_ids_removed']} | Plan variants {c['plan_variants_before']} -> {c['plan_names_after']}")
+print(f"Missing usage: {c['usage_rows_missing_entirely']} missing monthly rows + {c['usage_blank_values']} blank values (plan-wise median)")
+print(f"Extreme bills capped (IQR): {c['extreme_bills_capped']} | Support resolution missing: {c['support_resolution_missing']}")
+print(f"Overall churn: {c['overall_churn_rate_pct']}%"); print("Plan churn %:\n", rate("plan").to_string())
+print("Avg tickets churned vs retained:", df.groupby("churn").tickets.mean().round(2).to_dict())
+print("% churners with >=1 late payment:", round((df[df.churn_flag == 1].late_payments >= 1).mean() * 100, 1))
+print("\n=== SHEET 2 ==="); print(f"Features: {m['n_features_before_selection']} -> {m['n_selected']} selected; train/test = {m['train_size']}/{m['test_size']}")
+print(pd.DataFrame(m["metrics"]).to_string())
+print("\n=== SHEET 3 ==="); print("Tenure %:\n", rate("tenure_group").to_string()); print("Region %:\n", rate("region").to_string())
+print("Segment %:\n", rate("segment").to_string()); print("High-risk customers:", m["high_risk_customers"])

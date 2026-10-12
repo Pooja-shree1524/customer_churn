@@ -1,0 +1,12 @@
+{
+  "duplicate_ids_removed": 150,
+  "plan_variants_before": 34,
+  "plan_names_after": 5,
+  "usage_rows_missing_entirely": 1200,
+  "usage_blank_values": 2160,
+  "extreme_bills_capped": 182,
+  "support_resolution_missing": 375,
+  "final_rows": 5000,
+  "final_cols": 25,
+  "overall_churn_rate_pct": 26.2
+}

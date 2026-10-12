@@ -1,0 +1,48 @@
+{
+  "selected_features": [
+    "usage_drop",
+    "avg_resolution_hrs",
+    "tenure_months",
+    "tickets_per_month",
+    "avg_data",
+    "avg_voice",
+    "avg_bill",
+    "bill_per_usage",
+    "avg_late_days",
+    "avg_sms",
+    "age",
+    "tickets",
+    "late_payments",
+    "service_issues",
+    "high_complaint_flag",
+    "plan_changes",
+    "network_issues",
+    "outages"
+  ],
+  "n_features_before_selection": 30,
+  "n_selected": 18,
+  "pca_components_95pct": 12,
+  "dropped_corr": [
+    "late_payment_ratio",
+    "total_usage"
+  ],
+  "metrics": {
+    "Random Forest": {
+      "Accuracy": 0.839,
+      "Precision": 0.671,
+      "Recall": 0.756,
+      "F1": 0.711,
+      "ROC_AUC": 0.891
+    },
+    "Logistic Regression (baseline)": {
+      "Accuracy": 0.803,
+      "Precision": 0.596,
+      "Recall": 0.771,
+      "F1": 0.672,
+      "ROC_AUC": 0.881
+    }
+  },
+  "high_risk_customers": 881,
+  "train_size": 4000,
+  "test_size": 1000
+}
